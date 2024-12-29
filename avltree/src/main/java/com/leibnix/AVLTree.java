@@ -113,6 +113,9 @@ public class AVLTree<T> implements AVL<T> {
     }
 
     private void rebalance(Node<T> node) {
+        if ( node == null ) {
+            return;
+        }
         node.updateBalanceFactor();// update the FE of the parents up to and including the root of the last line of the added node
         if (node.getBalanceFactor() == 2) {
             if (node.getRightNode().getBalanceFactor() == -1) {
@@ -125,6 +128,43 @@ public class AVLTree<T> implements AVL<T> {
             }
             rotateRight(node);
         }
+        rebalance(node.getFather());
+    }
+
+    private void rotateRight(Node<T> node) {
+        Node<T> left = node.getLeftNode();
+        Node<T> father = node.getFather();
+        if (father == null) {
+            this.root = left;
+        } else {
+            if (father.getLeftNode() == node) {
+                father.setLeftNode(left);
+            } else {
+                father.setRightNode(left);
+            }
+        }
+        node.setLeftNode(left.getRightNode());
+        left.setRightNode(node);
+        left.changeFather(father);
+        node.changeFather(left);
+    }
+
+    private void rotateLeft(Node<T> node) {
+        Node<T> right = node.getRightNode();
+        Node<T> father = node.getFather();
+        if (father == null) {
+            this.root = right;
+        } else {
+            if (father.getLeftNode() == node) {
+                father.setLeftNode(right);
+            } else {
+                father.setRightNode(right);
+            }
+        }
+        node.setRightNode(right.getLeftNode());
+        right.setLeftNode(node);
+        right.changeFather(father);
+        node.changeFather(right);
     }
 
     @Override
