@@ -1,0 +1,56 @@
+@options
+@packages
+-classpath
+'/Users/axelarrondo/.m2/repository/org/springframework/boot/spring-boot-starter-logging/2.7.3/spring-boot-starter-logging-2.7.3.jar:/Users/axelarrondo/.m2/repository/ch/qos/logback/logback-classic/1.2.11/logback-classic-1.2.11.jar:/Users/axelarrondo/.m2/repository/ch/qos/logback/logback-core/1.2.11/logback-core-1.2.11.jar:/Users/axelarrondo/.m2/repository/org/slf4j/slf4j-api/1.7.32/slf4j-api-1.7.32.jar:/Users/axelarrondo/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.17.2/log4j-to-slf4j-2.17.2.jar:/Users/axelarrondo/.m2/repository/org/apache/logging/log4j/log4j-api/2.17.2/log4j-api-2.17.2.jar:/Users/axelarrondo/.m2/repository/org/slf4j/jul-to-slf4j/1.7.36/jul-to-slf4j-1.7.36.jar'
+-encoding
+'UTF-8'
+-protected
+-source
+'19'
+-sourcepath
+'/Users/axelarrondo/com.leibnix/BinarySearchTree/binarsearchytree/src/main/java:/Users/axelarrondo/com.leibnix/BinarySearchTree/binarsearchytree/target/generated-sources/annotations'
+-author
+-bottom
+'Copyright &#169; 2024 <a href="https://leibnix.com/">leibnix</a>. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'/Users/axelarrondo/com.leibnix/BinarySearchTree/binarsearchytree/target/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'binarytree 1.0.0 API'
+-use
+-version
+-windowtitle
+'binarytree 1.0.0 API'
+com.leibnix
+/Users/axelarrondo/.m2/repository/org/springframework/boot/spring-boot-starter-logging/2.7.3/spring-boot-starter-logging-2.7.3.jar = 1660804217000
+/Users/axelarrondo/.m2/repository/ch/qos/logback/logback-classic/1.2.11/logback-classic-1.2.11.jar = 1646514865000
+/Users/axelarrondo/.m2/repository/ch/qos/logback/logback-core/1.2.11/logback-core-1.2.11.jar = 1646514816000
+/Users/axelarrondo/.m2/repository/org/slf4j/slf4j-api/1.7.32/slf4j-api-1.7.32.jar = 1626782213000
+/Users/axelarrondo/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.17.2/log4j-to-slf4j-2.17.2.jar = 1645648225000
+/Users/axelarrondo/.m2/repository/org/apache/logging/log4j/log4j-api/2.17.2/log4j-api-2.17.2.jar = 1645648111000
+/Users/axelarrondo/.m2/repository/org/slf4j/jul-to-slf4j/1.7.36/jul-to-slf4j-1.7.36.jar = 1644327337000
+/Users/axelarrondo/com.leibnix/BinarySearchTree/binarsearchytree/src/main/java/.DS_Store = 1735152105611
+/Users/axelarrondo/com.leibnix/BinarySearchTree/binarsearchytree/src/main/java = 1735152105610
+/Users/axelarrondo/com.leibnix/BinarySearchTree/binarsearchytree/target/generated-sources/annotations = 1735339622351
+/Users/axelarrondo/com.leibnix/BinarySearchTree/binarsearchytree/target/apidocs/tag-search-index.js = 1735340142936
+/Users/axelarrondo/com.leibnix/BinarySearchTree/binarsearchytree/target/apidocs/overview-tree.html = 1735340142913
+/Users/axelarrondo/com.leibnix/BinarySearchTree/binarsearchytree/target/apidocs/module-search-index.js = 1735340142933
+/Users/axelarrondo/com.leibnix/BinarySearchTree/binarsearchytree/target/apidocs/index.html = 1735340142962
+/Users/axelarrondo/com.leibnix/BinarySearchTree/binarsearchytree/target/apidocs/package-search-index.js = 1735340142934
+/Users/axelarrondo/com.leibnix/BinarySearchTree/binarsearchytree/target/apidocs/jquery-ui.overrides.css = 1735340142980
+/Users/axelarrondo/com.leibnix/BinarySearchTree/binarsearchytree/target/apidocs/index-all.html = 1735340142958
+/Users/axelarrondo/com.leibnix/BinarySearchTree/binarsearchytree/target/apidocs/allpackages-index.html = 1735340142932
+/Users/axelarrondo/com.leibnix/BinarySearchTree/binarsearchytree/target/apidocs/member-search-index.js = 1735340142935
+/Users/axelarrondo/com.leibnix/BinarySearchTree/binarsearchytree/target/apidocs/copy.svg = 1735340142972
+/Users/axelarrondo/com.leibnix/BinarySearchTree/binarsearchytree/target/apidocs/script.js = 1735340142971
+/Users/axelarrondo/com.leibnix/BinarySearchTree/binarsearchytree/target/apidocs/stylesheet.css = 1735340142970
+/Users/axelarrondo/com.leibnix/BinarySearchTree/binarsearchytree/target/apidocs/search-page.js = 1735340142976
+/Users/axelarrondo/com.leibnix/BinarySearchTree/binarsearchytree/target/apidocs/help-doc.html = 1735340142966
+/Users/axelarrondo/com.leibnix/BinarySearchTree/binarsearchytree/target/apidocs/element-list = 1735340142880
+/Users/axelarrondo/com.leibnix/BinarySearchTree/binarsearchytree/target/apidocs/search.html = 1735340142960
+/Users/axelarrondo/com.leibnix/BinarySearchTree/binarsearchytree/target/apidocs/allclasses-index.html = 1735340142930
+/Users/axelarrondo/com.leibnix/BinarySearchTree/binarsearchytree/target/apidocs/type-search-index.js = 1735340142934
+/Users/axelarrondo/com.leibnix/BinarySearchTree/binarsearchytree/target/apidocs/search.js = 1735340142974

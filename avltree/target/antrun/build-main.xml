@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="maven-antrun-" default="main">
+  <target name="main">
+    <echo message="texto a mostrar en terminal y se muestra el valor de la propiedad example de settings.xml test" />
+  </target>
+</project>
