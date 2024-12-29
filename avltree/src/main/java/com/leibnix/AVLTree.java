@@ -20,12 +20,15 @@ public class AVLTree<T> implements AVL<T> {
         private Node rightNode;
 
         private int balanceFactor;
+
+        private Node<T> father;
     
         public Node() {
         }
 
-        public Node(T value) {
+        public Node(T value, Node<T> father) {
             this.value = value;
+            this.father = father;
         }
 
         private boolean isInstanceOf(Class<T> clazz) {
@@ -56,74 +59,77 @@ public class AVLTree<T> implements AVL<T> {
             return rightNode;
         }
 
+        public Node<T> getFather(){
+            return this.father;
+        }
+
+        public void changeFather(Node<T> newFather){
+            this.father = newFather;
+        }
+
         public int getBalanceFactor() {
             return balanceFactor;
         }
 
-        public void calculateBalanceFactor() {
-            int leftHeight = height(leftNode);
-            int rightHeight = height(rightNode);
+        public void updateBalanceFactor() {
+            int leftHeight = height(this.leftNode);
+            int rightHeight = height(this.rightNode);
             this.balanceFactor = rightHeight - leftHeight;
+        }
+
+        public boolean isRoot(){
+            return this.father == null;
         }
         
     }
 
     @Override
     public void add(T value) {
-        if (root == null) {
-            root = new Node(value);
+        if (this.root == null) {
+            this.root = new Node(value, null);
         } else {
-            add(value, root);
+            add(value, this.root);
         }
     }
 
-    private void add(T value, Node<T> node) {
-        if (value.hashCode() < node.getValue().hashCode()) {
-            if (node.getLeftNode() == null) {
-                node.setLeftNode(new Node(value));
+    private void add(T value, Node<T> father) {
+        if (value.hashCode() < father.getValue().hashCode()) { // It is searched for the direction in which the node to be added will go.
+            if (father.getLeftNode() == null) { // if the left parent is null.
+                father.setLeftNode(new Node(value, father)); // the new node is inserted there.
+                father.leftNode.updateBalanceFactor(); // The FE of the last added node is updated.
+                rebalance(father); // It is rebalanced from the parent to the root.
             } else {
-                add(value, node.getLeftNode());
+                add(value, father.getLeftNode()); // recursion.
             }
         } else {
-            if (node.getRightNode() == null) {
-                node.setRightNode(new Node(value));
+            if (father.getRightNode() == null) { // if the right parent is null.
+                father.setRightNode(new Node(value, father)); // the new node is inserted there.
+                father.rightNode.updateBalanceFactor(); // The FE of the last added node is updated.
+                rebalance(father); // It is rebalanced from the parent to the root.
             } else {
-                add(value, node.getRightNode());
+                add(value, father.getRightNode()); // recursion.
             }
         }
-        rebalance(node);
     }
 
     private void rebalance(Node<T> node) {
-        node.calculateBalanceFactor();
-        if (node.getBalanceFactor() == -2) {
-            if (node.getLeftNode().getBalanceFactor() == 1) {
-                rotateLeft(node.getLeftNode());
-            }
-            rotateRight(node);
-        } else if (node.getBalanceFactor() == 2) {
+        node.updateBalanceFactor();// update the FE of the parents up to and including the root of the last line of the added node
+        if (node.getBalanceFactor() == 2) {
             if (node.getRightNode().getBalanceFactor() == -1) {
                 rotateRight(node.getRightNode());
             }
             rotateLeft(node);
+        } else if (node.getBalanceFactor() == -2) {
+            if (node.getLeftNode().getBalanceFactor() == 1) {
+                rotateLeft(node.getLeftNode());
+            }
+            rotateRight(node);
         }
-    }
-
-    private void rotateRight(Node<T> node) {
-        Node<T> temp = node.getLeftNode();
-        node.setLeftNode(temp.getRightNode());
-        temp.setRightNode(node);
-    }
-
-    private void rotateLeft(Node<T> node) {
-        Node<T> temp = node.getRightNode();
-        node.setRightNode(temp.getLeftNode());
-        temp.setLeftNode(node);
     }
 
     @Override
     public int getHeight() {
-        return height(root);
+        return height(this.root);
     }
 
     /**
