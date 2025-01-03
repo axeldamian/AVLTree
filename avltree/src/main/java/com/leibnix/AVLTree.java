@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import com.leibnix.objects.Imbalance;
+
 public class AVLTree<T> implements AVL<T> {
 
     private Node<T> root;
@@ -80,8 +82,49 @@ public class AVLTree<T> implements AVL<T> {
         public boolean isRoot(){
             return this.father == null;
         }
+
+
+        public Imbalance typeOfTurnToBePerformed() {
+            if (this.getBalanceFactor() == 2) {
+                if (this.getRightNode().getBalanceFactor() == -1) {
+                    return Imbalance.RL;
+                }
+                return Imbalance.RR;
+            } else if (this.getBalanceFactor() == -2) {
+                if (this.getLeftNode().getBalanceFactor() == 1) {
+                    return Imbalance.LR;
+                }
+                return Imbalance.LL;
+            }
+            return Imbalance.IT_IS_BALANCED;
+        }
+
+        private void rebalance() {
+    
+            this.updateBalanceFactor();// update the FE of the parents up to and including the root of the last line of the added node
+           
+            if (this.typeOfTurnToBePerformed() == Imbalance.LR) {
+                rotateLeft(this.getLeftNode());
+                rotateRight(this);
+            }
+            if (this.typeOfTurnToBePerformed() == Imbalance.RL) {
+                rotateRight(this.getRightNode());
+                rotateLeft(this);
+            }
+            if (this.typeOfTurnToBePerformed() == Imbalance.LL) {
+                rotateRight(this);
+            }
+            if (this.typeOfTurnToBePerformed() == Imbalance.RR) {
+                rotateLeft(this);
+            }
+    
+            if (this.getFather() != null) {
+                this.getFather().rebalance();
+            }
         
     }
+
+}
 
     @Override
     public void add(T value) {
@@ -116,55 +159,93 @@ public class AVLTree<T> implements AVL<T> {
         if ( node == null ) {
             return;
         }
+
         node.updateBalanceFactor();// update the FE of the parents up to and including the root of the last line of the added node
-        if (node.getBalanceFactor() == 2) {
-            if (node.getRightNode().getBalanceFactor() == -1) {
-                rotateRight(node.getRightNode());
-            }
-            rotateLeft(node);
-        } else if (node.getBalanceFactor() == -2) {
-            if (node.getLeftNode().getBalanceFactor() == 1) {
-                rotateLeft(node.getLeftNode());
-            }
+       
+        if (node.typeOfTurnToBePerformed() == Imbalance.LR) {
+            rotateLeft(node.getLeftNode());
             rotateRight(node);
         }
+        if (node.typeOfTurnToBePerformed() == Imbalance.RL) {
+            rotateRight(node.getRightNode());
+            rotateLeft(node);
+        }
+        if (node.typeOfTurnToBePerformed() == Imbalance.LL) {
+            rotateRight(node);
+        }
+        if (node.typeOfTurnToBePerformed() == Imbalance.RR) {
+            rotateLeft(node);
+        }
+
         rebalance(node.getFather());
     }
 
-    private void rotateRight(Node<T> node) {
-        Node<T> left = node.getLeftNode();
-        Node<T> father = node.getFather();
-        if (father == null) {
-            this.root = left;
-        } else {
-            if (father.getLeftNode() == node) {
-                father.setLeftNode(left);
-            } else {
-                father.setRightNode(left);
-            }
-        }
-        node.setLeftNode(left.getRightNode());
-        left.setRightNode(node);
-        left.changeFather(father);
-        node.changeFather(left);
-    }
+    /**
+     * public Node leftRotation(Node node) {
+if (node == null) {
+return null;
+}
+Node temporary = node.right;
+node.right = temporary.left;
+temporary.left = node;
 
+node.height = 1 + Math.max(height(node.left), height(node.right));
+temporary.height = 1 + Math.max(height(temporary.left), height(temporary.right));
+return temporary;
+}
+     */
+    /**
+     * It can't be a node method because it can be used on node->left.
+     */
     private void rotateLeft(Node<T> node) {
-        Node<T> right = node.getRightNode();
+
+        if (node == null) {
+            return;
+        }
+        
+        Node<T> right = node.getRightNode(); // node temporary
         Node<T> father = node.getFather();
-        if (father == null) {
-            this.root = right;
-        } else {
+
+        node.setRightNode(right.getLeftNode()); // Node temporary = node.right;
+        right.setLeftNode(node);
+
+        node.changeFather(right);
+
+        if (node.getRightNode() != null) {
+            node.getRightNode().changeFather(node);
+        }
+        if (father != null) {
             if (father.getLeftNode() == node) {
                 father.setLeftNode(right);
             } else {
                 father.setRightNode(right);
             }
+        } else {
+            this.root = right;
         }
-        node.setRightNode(right.getLeftNode());
-        right.setLeftNode(node);
-        right.changeFather(father);
-        node.changeFather(right);
+    }
+
+    /**
+     * It can't be a node method because it can be used on node->right.
+     */
+    private void rotateRight(Node<T> node) {
+        Node<T> left = node.getLeftNode();
+        Node<T> father = node.getFather();
+        node.setLeftNode(left.getRightNode());
+        left.setRightNode(node);
+        node.changeFather(left);
+        if (node.getLeftNode() != null) {
+            node.getLeftNode().changeFather(node);
+        }
+        if (father != null) {
+            if (father.getLeftNode() == node) {
+                father.setLeftNode(left);
+            } else {
+                father.setRightNode(left);
+            }
+        } else {
+            this.root = left;
+        }
     }
 
     @Override

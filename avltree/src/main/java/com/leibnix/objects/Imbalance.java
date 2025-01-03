@@ -4,7 +4,8 @@ public enum Imbalance {
         LL("ll"),
         RR("rr"),
         LR("lr"),
-        RL("rl");
+        RL("rl"),
+        IT_IS_BALANCED("balanced");
     
         private String type;
     
